@@ -1,0 +1,36 @@
+{
+  "name": "http-post",
+  "version": "1.0.0",
+  "description": "http post using Node, Express and lowdb",
+  "main": "http_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon http_server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jaywood128/http-post.git"
+  },
+  "author": "Johnathon Wood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaywood128/http-post/issues"
+  },
+  "homepage": "https://github.com/jaywood128/http-post#readme",
+  "dependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "lowdb": "^1.0.0",
+    "moment": "^2.29.4",
+    "nodemon": "^2.0.20"
+  },
+  "nodemonConfig": {
+    "ext": "js",
+    "ignore": [
+      "*.test.ts",
+      "db/*"
+    ],
+    "delay": "2"
+  }
+}
