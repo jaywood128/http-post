@@ -15,7 +15,7 @@
           <input type="text" id="firstName" name="firstName"><br>
           <label for="lastName">Last name:</label><br>
           <input type="text" id="lastName" name="lastName"><br><br>
-          <input type="submit" value="Submit" onsubmit="add()">
+          <input type="submit" value="Submit" onsubmit="">
         </form>
 
         </form>  
@@ -82,6 +82,25 @@ function add(){
     // user browser client (super agent) to make a POST to url
     // if err, log the error otherwise append a string to status element that POST returned an 200
     // end( callback(err, res))
+
+    superagent
+        .post(url)
+        .send(user)
+        .end(function(err,res){
+            if(err){
+                console.log(err);
+            }
+            else{
+                console.log(res);
+                if(res.statusCode === 200){
+                    document.getElementById('status').innerHTML = `
+                        <b>Response: Status Code 200.</b> The HTTP 200 OK success status response code indicates that the HTTP request has succeeded.<br>
+                        User: ${name}<br>
+                        ${new Date()}
+                    `;
+                }
+            }
+        });
 
   
 

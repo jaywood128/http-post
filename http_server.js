@@ -4,14 +4,20 @@ const low = require('lowdb');
 const fs = require('lowdb/adapters/FileSync');
 const adapter = new fs('db.json');
 const db = low(adapter);
+bodyParser = require('body-parser');
 
 
 const {faker} = require('@faker-js/faker');
 
 db.defaults({ users: []}).write();
 
+// User the following code to serve images, CSS files, and JavaScript files in a directory named public:
+app.use(express.static('public'))
 
-// Remove body parser and try to POST /users and see the error
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
 // TypeError: Cannot read properties of undefined (reading 'name')
 
 
@@ -29,11 +35,6 @@ db.defaults({ users: []}).write();
 
 // https://stackoverflow.com/questions/38306569/what-does-body-parser-do-with-express
 
-
-
-// User the following code to serve images, CSS files, and JavaScript files in a directory named public:
-
-app.use(express.static('public'))
 
 //return all users 
 // 2) Add html to display User card using Bootstrap card
@@ -54,7 +55,26 @@ app.post("/users", function(req, res){
   // create user obj
   // save user to database
   // send back users in response
-  
+
+  var user = {
+    'name'          : req.body.name,
+    'dob'           : req.body.dob,
+    'email'         : req.body.email,
+    'username'      : req.body.username,
+    'password'      : req.body.password,
+    'phone'         : req.body.phone,
+    'streetaddress' : req.body.streetaddress,
+    'citystatezip'  : req.body.citystatezip,
+    'latitude'      : req.body.latitude,
+    'longitude'     : req.body.longitude,
+    'avatar'        : faker.internet.avatar() 
+}
+  console.log(JSON.stringify(user))
+  db.get('users').push(user).write();
+
+  res.send(db.get('users').value());
+  // res.statusCode(200);
+
   
 })
 
